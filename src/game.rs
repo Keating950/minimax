@@ -4,9 +4,9 @@ pub trait Game: Sized {
     type GamePlayer: Player;
     type Move;
 
-    fn children(
-        &self,
-        player: &Self::GamePlayer,
+    fn children<'a>(
+        &'a self,
+        player: &'a Self::GamePlayer,
     ) -> Box<dyn Iterator<Item = (Self::Move, Self)> + '_>;
 
     fn state(&self) -> GameState<Self::GamePlayer>;
