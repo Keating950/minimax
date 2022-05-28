@@ -15,9 +15,15 @@ pub trait Game: Sized {
         match self.state() {
             GameState::Won(tok) => {
                 if tok == player {
-                    return (None, if player.is_maximizer() { 1. } else { -1. });
+                    return (
+                        None,
+                        if player.is_maximizer() { f32::INFINITY } else { f32::NEG_INFINITY },
+                    );
                 } else {
-                    return (None, if player.is_maximizer() { -1. } else { 1. });
+                    return (
+                        None,
+                        if player.is_maximizer() { f32::NEG_INFINITY } else { f32::INFINITY },
+                    );
                 }
             }
             GameState::Drawn => return (None, 0.),
